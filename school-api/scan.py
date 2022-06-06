@@ -5,13 +5,8 @@ import os
 table_name = os.environ['TABLE_NAME']
 client = boto3.client('dynamodb')
 def lambda_handler(event, context):
-  data = client.get_item(
-    TableName=table_name,
-    Key={
-        'id': {
-          'N': event['queryStringParameters']['id']
-        }
-    }
+  data = client.scan(
+    TableName=table_name
   )
 
   response = {
